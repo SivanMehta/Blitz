@@ -60,8 +60,8 @@ class Player():
 
         self.running_score = [0, 0, 0, 0]
 
-    def get_score(self):
-        for card in self.hand:
+    def get_score(self, hand):
+        for card in hand:
             self.running_score[card.suit] += card.score()
 
         return max(self.running_score)
@@ -91,6 +91,6 @@ class Blitz():
     def get_players_score(self):
         scores = []
         for player in self.players:
-            scores.append(player.get_score())
+            scores.append(player.get_score(player.hand))
 
         return scores
