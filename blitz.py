@@ -18,14 +18,40 @@ class Card():
             2 = club
             3 = diamond
         """
+
         self.suit = suit
-        self.value = 14
+        self.value = value
+
+    def _suit(self, number):
+        if number == 1:
+            return "Spade"
+        elif number == 2:
+            return "Heart"
+        elif number == 3:
+            return "Club"
+        elif number == 4:
+            return "Diamond"
+
+    def _value(self, number):
+        if number <= 10:
+            return str(number)
+        elif number == 11:
+            return "Jack"
+        elif number == 12:
+            return "Queen"
+        elif number == 13:
+            return "King"
+        elif number == 14:
+            return "Ace"
+
+    def __repr__(self):
+        return self._value(self.value) + " of " + self._suit(self.suit) + "s"
 
 class Blitz():
     def __init__(self):
         self.deck = []
-        for value in range(1, 15):
-            for suit in range(1, 5):
+        for suit in range(1, 5):
+            for value in range(1, 15):
                 self.deck.append(Card(suit, value))
 
         print(self.deck)
