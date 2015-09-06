@@ -55,8 +55,6 @@ class Player():
         for i in range(3):
             self.hand.append(self.deck.pop())
 
-        print(self.hand) 
-
 class Blitz():
     def __init__(self, players = 5):
 
@@ -71,5 +69,12 @@ class Blitz():
         # deal out the deck
         for i in range(players):
             Player(self.deck)
+
+        # set the cards out
+        self.open = self.deck.pop()
+
+        self.turn = 0
+
+        print(self.open)
 
 Blitz()
