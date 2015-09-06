@@ -5,19 +5,21 @@ import sys
 def avg(scores):
     return sum(scores) * 1.0 / len(scores)
 
-print "Generating data on initial hands..."
+def average():
+    print "Generating data on initial hands..."
 
-scores = []
+    scores = []
 
-for i in range(100000):
-    game = Blitz()
-    scores.append(avg(game.get_players_score()))
+    for i in range(100000):
+        game = Blitz()
+        scores.append(avg(game.get_players_score()))
 
-    sys.stdout.flush()
-    sys.stdout.write("\r\t%2.2f%% of trials run... " % ((i+1)*1.0/1000))
+        sys.stdout.flush()
+        sys.stdout.write("\r\t%2.2f%% of trials run... " % ((i+1)*1.0/1000))
 
-print "done!"
+    print "done!"
 
-print "Average Score: ", avg(scores)
-plt.hist(scores, bins = 100, normed = True)
-plt.show()
+    print "Average Score: ", avg(scores)
+    plt.hist(scores, bins = 100, normed = True)
+    plt.show()
+    

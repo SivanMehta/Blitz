@@ -1,7 +1,7 @@
 # Sivan Mehta
 # September 6, 2015
 
-import random
+import random, copy
 
 class Card():
     def __init__(self, suit = 0, value = 14):
@@ -66,6 +66,16 @@ class Player():
         max_score = max(running_score)
 
         return max_score
+
+    def get_potential_score(self, card):
+        dummy = copy.deepcopy(self.hand)
+        current_score = get_score(self.hand)
+
+        for i in xrange(3):
+            potential_hand = dummy[0:i] + dummy[i + 1:3]
+            potential_hand.append(card)
+
+            current_score = max(current_score, get_score(potential_hand))
 
 class Blitz():
     def __init__(self, players = 5):
