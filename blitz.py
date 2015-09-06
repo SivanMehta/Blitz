@@ -47,13 +47,29 @@ class Card():
     def __repr__(self):
         return self._value(self.value) + " of " + self._suit(self.suit) + "s"
 
+class Player():
+    def __init__(self, deck):
+        self.deck = deck
+
+        self.hand = []
+        for i in range(3):
+            self.hand.append(self.deck.pop())
+
+        print(self.hand) 
+
 class Blitz():
-    def __init__(self):
+    def __init__(self, players = 5):
+
+        # create the deck
         self.deck = []
         for suit in range(1, 5):
             for value in range(1, 15):
                 self.deck.append(Card(suit, value))
 
-        print(self.deck)
+        random.shuffle(self.deck)
+
+        # deal out the deck
+        for i in range(players):
+            Player(self.deck)
 
 Blitz()
