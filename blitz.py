@@ -7,7 +7,7 @@ class Card():
     def __init__(self, suit = 0, value = 14):
         """
             basic card class encoded as follows
-            values 1 - 10 correspond to numbers
+            values 2 - 10 correspond to numbers
             11 = Jack
             12 = Queen
             13 = King
@@ -22,14 +22,17 @@ class Card():
         self.suit = suit
         self.value = value
 
+    def score(self):
+        return min(self.value, 10) + (self.value == 14)
+
     def _suit(self, number):
-        if number == 1:
+        if number == 0:
             return "Spade"
-        elif number == 2:
+        elif number == 1:
             return "Heart"
-        elif number == 3:
+        elif number == 2:
             return "Club"
-        elif number == 4:
+        elif number == 3:
             return "Diamond"
 
     def _value(self, number):
@@ -55,26 +58,44 @@ class Player():
         for i in range(3):
             self.hand.append(self.deck.pop())
 
+        self.running_score = [0, 0, 0, 0]
+
+    def get_score(self):
+        for card in self.hand:
+            self.running_score[card.suit] += card.score()
+
+        return max(self.running_score)
+
 class Blitz():
     def __init__(self, players = 5):
 
         # create the deck
         self.deck = []
-        for suit in range(1, 5):
-            for value in range(1, 15):
+        for suit in range(4):
+            for value in range(2, 15):
                 self.deck.append(Card(suit, value))
 
         random.shuffle(self.deck)
 
+        self.players = []
+
         # deal out the deck
         for i in range(players):
-            Player(self.deck)
+            self.players.append(Player(self.deck))
 
         # set the cards out
         self.open = self.deck.pop()
 
         self.turn = 0
 
-        print(self.open)
+    def get_players_score(self):
+        scores = []
+        for player in self.players:
+            scores.append(player.get_score())
 
-Blitz()
+        return scores
+
+game = Blitz()
+
+print(game.get_players_score())
+
