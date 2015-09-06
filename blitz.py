@@ -94,8 +94,3 @@ class Blitz():
             scores.append(player.get_score())
 
         return scores
-
-game = Blitz()
-
-print(game.get_players_score())
-
