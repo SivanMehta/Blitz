@@ -55,9 +55,8 @@ class Player():
         self.deck = deck
 
         self.hand = []
-        for i in range(3):
+        for i in xrange(3):
             self.hand.append(self.deck.pop())
-
 
     def get_score(self, hand):
         running_score = [0, 0, 0, 0]
@@ -65,7 +64,7 @@ class Player():
         for card in hand:
             running_score[card.suit] += card.score()
         max_score = max(running_score)
-        
+
         return max_score
 
 class Blitz():
@@ -73,8 +72,8 @@ class Blitz():
 
         # create the deck
         self.deck = []
-        for suit in range(4):
-            for value in range(2, 15):
+        for suit in xrange(4):
+            for value in xrange(2, 15):
                 self.deck.append(Card(suit, value))
 
         random.shuffle(self.deck)
@@ -82,7 +81,7 @@ class Blitz():
         self.players = []
 
         # deal out the deck
-        for i in range(players):
+        for i in xrange(players):
             self.players.append(Player(self.deck))
 
         # set the cards out
