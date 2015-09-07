@@ -10,7 +10,7 @@ def average_beginning():
 
     scores = []
 
-    for i in range(100000):
+    for i in xrange(100000):
         game = Blitz()
         scores.append(avg(game.get_players_score()))
 
@@ -23,12 +23,30 @@ def average_beginning():
     plt.hist(scores, bins = 100, normed = True)
     plt.show()
 
-def turn_based():
-    game = Blitz(3)
+def turn_based_trial(rounds):
+    game = Blitz(5)
 
-    for turn in range(10):
+    scores = []
+
+    for turn in range(5 * rounds):
         game.make_turn()
-        print game.get_players_score()
+        scores.append(avg(game.get_players_score()))
 
+    return avg(scores)
 
-turn_based()
+def turn_based_game():
+    avgs = []
+
+    for i in xrange(10000):
+        avgs.append(turn_based_trial(2))
+
+        sys.stdout.flush()
+        sys.stdout.write("\r\t%2.2f%% of trials run... " % ((i+1)*1.0/100))
+
+    print "done!"
+
+    print "Average Score after 2 rounds: ", avg(avgs)
+    plt.hist(avgs, bins = 100, normed = True)
+    plt.show()
+
+turn_based_game()
