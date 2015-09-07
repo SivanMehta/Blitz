@@ -49,4 +49,5 @@ def turn_based_game():
     plt.hist(avgs, bins = 100, normed = True)
     plt.show()
 
+average_beginning()
 turn_based_game()
