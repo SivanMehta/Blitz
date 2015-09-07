@@ -118,9 +118,9 @@ class Blitz():
         result = player.is_improvement(self.open)[1]
 
         if result > 0:
+            self.open = player.hand[result]
             player.hand = player.hand[0:result] + player.hand[result + 1:3]
             player.hand.append(self.open)
-            self.open = player.hand[result]
         else:
             self.open = self.deck.pop()
 
