@@ -120,6 +120,16 @@ class Blitz():
         if result > 0:
             player.hand = player.hand[0:result] + player.hand[result + 1:3]
             player.hand.append(self.open)
+            self.open = player.hand[result]
+        else:
             self.open = self.deck.pop()
 
         self.turn = (self.turn + 1) % len(self.players)
+
+        # recreate the deck otherwise
+        if len(self.deck) == 0:
+            for suit in xrange(4):
+                for value in xrange(2, 15):
+                    self.deck.append(Card(suit, value))
+
+                random.shuffle(self.deck)
