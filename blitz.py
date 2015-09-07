@@ -67,15 +67,21 @@ class Player():
 
         return max_score
 
-    def get_potential_score(self, card):
+    def is_improvement(self, card):
         dummy = copy.deepcopy(self.hand)
-        current_score = get_score(self.hand)
+        max_score = 0
+        remove = -1
 
         for i in xrange(3):
             potential_hand = dummy[0:i] + dummy[i + 1:3]
             potential_hand.append(card)
+            potential_score = self.get_score(potential_hand)
 
-            current_score = max(current_score, get_score(potential_hand))
+            if potential_score > max_score:
+                max_score = potential_score
+                remove = i
+
+        return (max_score - self.get_score(self.hand), remove) 
 
 class Blitz():
     def __init__(self, players = 5):
@@ -105,3 +111,15 @@ class Blitz():
             scores.append(player.get_score(player.hand))
 
         return scores
+
+    def make_turn(self):
+        player = self.players[self.turn]
+
+        result = player.is_improvement(self.open)[1]
+
+        if result > 0:
+            player.hand = player.hand[0:result] + player.hand[result + 1:3]
+            player.hand.append(self.open)
+            self.open = self.deck.pop()
+
+        self.turn = (self.turn + 1) % len(self.players)
