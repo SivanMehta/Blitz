@@ -35,6 +35,7 @@ def turn_based_trial(rounds):
     return avg(scores)
 
 def turn_based_game():
+    print "Generating data on turn-based games..."
     avgs = []
 
     for i in xrange(10000):
