@@ -1,6 +1,6 @@
 from blitz import *
 from matplotlib import pyplot as plt
-import sys
+import sys, csv
 
 def avg(scores):
     return sum(scores) * 1.0 / len(scores)
@@ -49,5 +49,11 @@ def turn_based_game():
     plt.hist(avgs, bins = 100, normed = True)
     plt.show()
 
-average_beginning()
+    with open("out.csv", "w+") as f:
+        writer = csv.writer(f, delimiter = ",")
+
+        for row in avgs:
+            writer.writerow([row])
+
+# average_beginning()
 turn_based_game()
