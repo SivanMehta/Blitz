@@ -6,19 +6,19 @@ This is a basic analysis of the card game [Blitz](https://en.wikipedia.org/wiki/
 ### Usage
 To generate a graph of the beginning hands and the result of 2 full turns simply run the following command:
 
-```shell
-$ python game.py
+```
 Generating data on initial hands...
 	100.00% of trials run... done!
-Average Score:  13.08546
+Average Score:  13.085548
+Generating data on turn-based games...
 	100.00% of trials run... done!
-Average Score after 2 rounds:  14.257246
+Average Score after 2 rounds:  13.11134
 ```
 
 You can see the results in the files `2_rounds.png` and `average_starter.png`
 
 ### Requirements
-```shell
+```
 $ python --version
 Python 2.7.8
 $ python
